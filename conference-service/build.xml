@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." name="conference-service">
+
+	<property name="jar.name" value="conference-service.jar" />
+	
+	<path id="build.main.classpath">
+
+		<fileset dir="../conference/lib/main">
+			<include name="**/*.jar" />
+		</fileset>
+		
+		<pathelement path="../conference-service-intf/target/out/main" />
+	</path>
+
+	<path id="build.test.classpath">
+
+		<fileset dir="../conference/lib/test">
+			<include name="**/*.jar" />
+		</fileset>
+
+		<fileset dir="target/out">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<path id="test.classpath">
+
+		<fileset dir="../conference/lib/test">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target depends="" name="init">
+		<mkdir dir="target/out" />
+		<mkdir dir="target/out/main" />
+		<mkdir dir="target/out/test" />
+		<mkdir dir="target/out/junit" />
+	</target>
+
+
+	<target depends="" name="clean">
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="target/out" includes="**/*" />
+		</delete>
+	</target>
+
+
+	<target depends="init, copy.sources" name="compile.main">
+		<javac classpathref="build.main.classpath" includeantruntime="false" debug="true" destdir="target/out/main" encoding="UTF-8">
+			<src path="src/main" />
+			<compilerarg value="-Xlint:-path" />
+		</javac>
+	</target>
+	
+	<target name="copy.sources">
+		<copy todir="target/out/main">
+		 	<fileset dir="src/main" includes="**" />
+		</copy>
+	</target>
+	
+	<target depends="compile.main" name="compile.test">
+		<javac classpathref="build.test.classpath" includeantruntime="false" debug="true" destdir="target/out/test" encoding="UTF-8" >
+			<src path="src/test" />
+			<compilerarg value="-Xlint:-path" />
+		</javac>
+	</target>
+
+	<target depends="compile.test" name="test">
+
+		<!--
+		<junit fork="true" printsummary="yes" showoutput="yes">
+			<classpath refid="test.classpath" />
+			<formatter type="xml" usefile="true" />
+			<test todir="target/out/junit" haltonfailure="true" name="xxx" />
+		</junit>
+		-->
+	</target>
+
+	<target depends="compile.test" name="build">
+		
+		<jar destfile="target/out/${jar.name}">
+
+			<fileset dir="target/out/main">
+				<include name="**" />
+			</fileset>
+
+			<fileset dir="src/main">
+				<include name="**/*.properties" />
+			</fileset>
+
+			<manifest>
+				<attribute name="Built-By" value="ANT" />
+
+				<section name="common">
+					<attribute name="Specification-Title" value="Conference Service Implementation" />
+					<attribute name="Specification-Version" value="${version}" />
+					<attribute name="Specification-Vendor" value="PRODYNA" />
+
+					<attribute name="Implementation-Title" value="Conference Service Implementation" />
+					<attribute name="Implementation-Version" value="${version}" />
+					<attribute name="Implementation-Vendor" value="PRODYNA" />
+				</section>
+			</manifest>
+
+		</jar>
+
+	</target>
+</project>

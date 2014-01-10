@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main"/>
+	<classpathentry kind="src" path="src/test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/conference-service-intf"/>
+	<classpathentry kind="lib" path="/conference/lib/main/querydsl-core.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/querydsl-jpa.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-beans.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-context.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-core.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-data-commons.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-data-jpa.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-expression.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-jdbc.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-orm.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-tx.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/validation-api.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-aop.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/test/junit.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/hibernate-core.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/hibernate-entitymanager.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/hibernate-validator.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/hibernate-jpa-2.0-api.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

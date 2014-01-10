@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivysettings>
+
+	<credentials host="${nexus.host}" realm="Sonatype Nexus Repository Manager" username="${nexus.user}" passwd="${nexus.password}" />
+
+	<settings defaultResolver="default" circularDependencyStrategy="error" />
+	
+	<property name="hibernate.version" value="4.2.8.Final" />
+	<property name="spring.version" value="4.0.0.RELEASE" />
+	<property name="querydsl.version" value="3.2.4" />
+        
+	<resolvers>
+		<filesystem name="local">
+			<ivy pattern="${ivy.home}/[organisation]/[module]/[revision]/ivy.xml" />
+			<artifact pattern="${ivy.home}/[organisation]/[module]/[revision]/[artifact].[ext]" />
+		</filesystem>
+
+	    <!-- <ibiblio name="nexus" m2compatible="true" root="${nexus.url}/content/groups/public/" />-->
+	    <ibiblio name="maven-central" m2compatible="true" root="http://repo1.maven.org/maven2/" />
+	    
+	    <filesystem name="nexus-releases">
+			<ivy pattern="${ivy.home}/content/repositories/releases/[organisation]/[module]/[revision]/ivy.xml" />
+			<artifact pattern="${ivy.home}/content/repositories/releases/[organisation]/[module]/[revision]/[artifact].[ext]" />
+		</filesystem>
+
+	    <filesystem name="nexus-snapshots" m2compatible="true" checkmodified="true" checksums="">
+			<ivy pattern="${ivy.home}/content/repositories/snapshots/[organisation]/[module]/[revision]/ivy.xml" />
+			<artifact pattern="${ivy.home}/content/repositories/snapshots/[organisation]/[module]/[revision]/[artifact].[ext]" />
+		</filesystem>
+	   
+		<chain name="default">
+			<resolver ref="local" />
+			<resolver ref="nexus-releases" />
+			<resolver ref="nexus-snapshots" />
+			<resolver ref="maven-central" />
+			<!-- <resolver ref="nexus" /> -->
+		</chain>
+	</resolvers>
+
+</ivysettings>

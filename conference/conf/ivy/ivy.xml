@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+
+	<info organisation="com.prodyna" module="com.prodyna.conference" revision="${project.version}" />
+
+	<configurations>
+		<conf name="main" />
+		<conf name="test" />
+		<conf name="gen" />
+	</configurations>
+
+	<publications>
+		<artifact name="conference" type="war" conf="main" />
+	</publications>
+
+	<dependencies>
+	
+		<!-- Main -->
+		<dependency org="org.springframework.data" 						name="spring-data-jpa" 						rev="1.4.3.RELEASE" 	conf="main -> default" />
+		<dependency org="org.springframework" 						name="spring-context" 						rev="${spring.version}" 	conf="main -> default" />
+		<dependency org="org.springframework" 						name="spring-beans" 						rev="${spring.version}" 	conf="main -> default" />
+		<dependency org="org.springframework" 						name="spring-core" 						rev="${spring.version}" 	conf="main -> default" />
+		<dependency org="org.springframework" 						name="spring-jdbc" 						rev="${spring.version}" 	conf="main -> default" />
+		<dependency org="org.springframework" 						name="spring-orm" 						rev="${spring.version}" 	conf="main -> default" />
+		<dependency org="org.springframework" 						name="spring-tx" 						rev="${spring.version}" 	conf="main -> default" />
+		<dependency org="org.springframework" 						name="spring-aop" 						rev="${spring.version}" 	conf="main -> default" />
+		<dependency org="org.springframework" 						name="spring-web" 						rev="${spring.version}" 	conf="main -> default" />
+		<dependency org="cglib" 									name="cglib" 						rev="3.1" 	conf="main -> default" />
+
+		<dependency org="org.hibernate" 						name="hibernate-entitymanager" 						rev="${hibernate.version}" 	conf="main -> default" />
+		<dependency org="org.hibernate" 						name="hibernate-core" 						rev="${hibernate.version}" 	conf="main -> default" />
+		<dependency org="org.hibernate" 						name="hibernate-validator" 						rev="4.3.1.Final" 	conf="main -> default" />
+		
+		<dependency org="com.mysema.querydsl" 						name="querydsl-jpa" 						rev="${querydsl.version}" 	conf="main -> default" />
+
+		<dependency org="log4j" 						name="log4j" 						rev="1.2.16" 	conf="main -> default" />
+		<dependency org="org.slf4j" 						name="slf4j-simple" 						rev="1.7.5" 	conf="main -> default" />
+	
+		<dependency org="javax.servlet" 						name="javax.servlet-api" 						rev="3.0.1" 	conf="main -> default" />
+    		
+		<!-- Test -->
+		<dependency org="junit" 						name="junit" 							rev="latest.release" 	conf="test -> default" />
+		<dependency org="org.springframework" 						name="spring-test" 						rev="${spring.version}" 	conf="test -> default" />
+		<dependency org="mysql" 						name="mysql-connector-java" 						rev="5.1.25" 	conf="test -> default" />
+	
+		<!-- Gen -->
+		<dependency org="com.mysema.querydsl" 						name="querydsl-apt" 						rev="${querydsl.version}" 	conf="gen -> default" />
+	</dependencies>
+</ivy-module>

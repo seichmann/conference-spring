@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/test"/>
+	<classpathentry kind="src" path="conf"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="lib" path="/conference/lib/main/antlr.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/aopalliance.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/asm.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/aspectjrt.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/cglib.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/commons-logging.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/dom4j.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/guava.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/hibernate-commons-annotations.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/hibernate-core.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/hibernate-entitymanager.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/hibernate-jpa-2.0-api.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/hibernate-validator.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/javassist.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/javax.servlet-api.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/jboss-logging.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/jcl-over-slf4j.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/jsr305.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/log4j.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/mysema-commons-lang.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/querydsl-core.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/querydsl-jpa.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/slf4j-api.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/slf4j-simple.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-aop.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-beans.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-context.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-core.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-data-commons.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-data-jpa.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-expression.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-jdbc.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-orm.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-tx.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/spring-web.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/main/validation-api.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/test/commons-logging.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/test/hamcrest-core.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/test/junit.jar" sourcepath="C:/Users/seichmann/.m2/repository/junit/junit/4.11/junit-4.11-sources.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/test/spring-core.jar"/>
+	<classpathentry kind="lib" path="/conference/lib/test/spring-test.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/conference-service-intf"/>
+	<classpathentry kind="lib" path="/conference/lib/test/mysql-connector-java.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/conference-service"/>
+	<classpathentry kind="lib" path="/conference/lib/main/jboss-transaction-api_1.1_spec.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

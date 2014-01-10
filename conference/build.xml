@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="."
+         name="com.prodyna.conference"
+         xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<property file="version.properties" />
+
+
+	<property name="service-intf" value="../conference-service-intf" />
+	<property name="service-intf-build" value="${service-intf}/build.xml" />
+	
+	<property name="service" value="../conference-service" />
+	<property name="service-build" value="${service}/build.xml" />
+
+	<property name="web" value="../conference-web" />
+	<property name="web-build" value="${service}/build.xml" />
+	
+	<property name="war.file" value="conference" />
+	<property name="war.file.name" value="${war.file}.war" />
+		
+	<path id="build.main.classpath">
+
+		<fileset dir="lib">
+			<include name="**/*.jar" />
+		</fileset>
+
+	</path>
+
+	<target depends="" name="init">
+
+		<fail unless="ivy.home">ivy.home must be set</fail>
+		<!--<fail unless="nexus.url">nexus.url must be set</fail>
+		<fail unless="nexus.user">nexus.user must be set</fail>
+		<fail unless="nexus.password">nexus.password must be set</fail>-->
+
+		<mkdir dir="target/out" />
+
+		<ant antfile="${service-intf-build}" target="init" inheritall="false" />
+		<ant antfile="${service-build}" target="init" inheritall="false" />
+	</target>
+
+
+	<target depends="" name="clean">
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="target/out" includes="**/*" />
+		</delete>
+
+		<ant antfile="${service-intf-build}" target="clean" inheritall="false" />
+		<ant antfile="${service-build}" target="clean" inheritall="false" />
+	</target>
+
+
+	<target depends="init" name="compile">
+		<ant antfile="${service-intf-build}"
+		     target="compile.main"
+		     inheritall="false" />
+		<ant antfile="${service-build}"
+		     target="compile.main"
+		     inheritall="false" />
+	</target>
+
+
+	<target depends="compile" name="test">
+		<ant antfile="${service-intf-build}" target="test" inheritall="false" />
+		<ant antfile="${service-build}" target="test" inheritall="false" />
+	</target>
+
+	<target depends="war" name="build">
+
+	</target>
+
+
+	<!-- 
+		Builds the war file
+	-->
+	<target depends="compile" name="war" description="Create a war file">
+		<property name="version" value="${project.version}" />
+		<war destfile="target/out/${war.file.name}" basedir="${web}/WebContent/">
+			<lib dir="lib/main" includes="*.*" />
+			<lib dir="${service-intf}/target/out/" includes="*.*" />
+			<lib dir="${service}/target/out/" includes="*.*" />
+			
+			<webinf dir="conf/spring" />
+			
+			<manifest>
+				<attribute name="Built-By" value="ANT" />
+
+				<section name="common">
+					<attribute name="Specification-Title"
+					           value="Conference Spring Application" />
+					<attribute name="Specification-Version"
+					           value="${version}" />
+					<attribute name="Specification-Vendor" value="PRODYNA" />
+
+					<attribute name="Implementation-Title"
+					           value="Conference Spring Application" />
+					<attribute name="Implementation-Version"
+					           value="${version}" />
+					<attribute name="Implementation-Vendor" value="PRODYNA" />
+				</section>
+			</manifest>
+		</war>
+	</target>
+		
+	<target depends="" name="ivy.init">
+		<ivy:settings file="conf/ivy/ivysettings.xml" />
+	</target>
+
+	<target depends="ivy.init" name="ivy.resolve">
+		<ivy:resolve file="conf/ivy/ivy.xml" transitive="true" />
+		<ivy:retrieve pattern="lib/[conf]/[artifact].[ext]"
+		              overwriteMode="different" transitive="true" />
+	</target>
+
+	<macrodef name="ivy-publish">
+		<attribute name="status" />
+		<attribute name="resolver" />
+		<attribute name="overwrite" default="true" />
+		<sequential>
+			<property name="version" value="${project.version}-@{status}" />
+
+			<antcall target="war" />
+
+			<ivy:settings file="conf/ivy/ivysettings.xml" />
+			<ivy:resolve file="conf/ivy/ivy.xml" transitive="false" />
+
+			<ivy:publish artifactspattern="target/out/[artifact].[ext]"
+			             resolver="@{resolver}"
+			             pubrevision="${project.version}"
+			             status="@{status}"
+			             forcedeliver="true"
+			             overwrite="@{overwrite}" />
+			<echo message="Artifact ${war.file.name} published to @{resolver} in version ${version}" />
+		</sequential>
+	</macrodef>
+
+	<target depends="test" name="ivy.pub.local">
+		<ivy-publish status="integration" resolver="local" />
+	</target>
+
+	<target depends="test" name="ivy.pub.milestone">
+		<ivy-publish status="milestone" resolver="nexus-snapshots" />
+	</target>
+
+	<target depends="test" name="ivy.pub.release">
+		<ivy-publish status="release"
+		             resolver="nexus-releases"
+		             overwrite="false" />
+	</target>
+
+	<target depends="ivy.init" name="ivy.clean">
+		<ivy:cleancache />
+
+		<delete includeemptydirs="true" failonerror="false">
+				<fileset dir="lib" includes="**/*" />
+		</delete>
+	</target>
+
+	<target depends="build, tomcat.undeploy" name="tomcat.deploy">
+		<fail unless="tomcat.home">tomcat.home must be set</fail>
+		<touch file="target/out/${war.file.name}"/>
+		<copy file="target/out/${war.file.name}" todir="${tomcat.home}/webapps" />
+	</target>
+
+	<target depends="" name="tomcat.undeploy">
+		<fail unless="tomcat.home">tomcat.home must be set</fail>
+		<delete file="${tomcat.home}/webapps/${war.file.name}" />
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${tomcat.home}/webapps/${war.file}" includes="**/*" />
+		</delete>
+	</target>
+</project>
